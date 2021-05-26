@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+
+class test{
+public:
+	int a;
+	test(int x){a=x;}
+	~test(){}
+	void func();
+	friend class fre;
+private:
+	static const int b=55;
+};
+class test1: public test{
+public:
+	test1(int a): test(a){}
+	void xx(){
+		cout<<this->a<<endl;
+	}
+};
+class fre{
+public:
+	fre(){}
+	~fre(){}
+	void pr(test* tt){
+		cout<<tt->b<<endl;
+	}
+};
+
+void test::func(){
+	cout<<this->a<<endl;
+}
+int ff(test& t);
+
+
+int main(int argc, char const *argv[])
+{
+	test1* temp = new test1(8989);
+	temp->a=43523;
+	fre* fr = new fre();
+	fr->pr(temp);
+	test temp1 = test(7);
+	test* tem[2];
+	tem[1] = new test(8);
+	temp->xx();
+	ff(temp1);
+	ff(*tem[1]);
+	return 0;
+}
+
+int ff(test& t){
+	cout<<t.a<<endl;
+	return 1;
+}
